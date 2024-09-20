@@ -38,12 +38,20 @@ int grid::CreateMonteCarloTracerParticles()
       for (i = GridStartIndex[0]; i <= GridEndIndex[0]; i++) {
         pos[0] = CellLeftEdge[0][i] + 0.5 * CellWidth[0][0]; 
 
+        // /* DEBUG */
+        // if (i != GridStartIndex[0] || j != GridStartIndex[1] || k != GridStartIndex[2])
+        //   continue;
+
+        // /* DEBUG */
+        // if (i != GridStartIndex[0] || j != GridEndIndex[1] || k != GridStartIndex[2])
+        //   continue;        
+
         /* DEBUG */
-        if (i != GridStartIndex[0] || j != GridStartIndex[1] || k != GridStartIndex[2])
-          continue;
+        if (j != GridStartIndex[1])
+          continue;          
 
         // if (i != GridEndIndex[0] || j != GridEndIndex[1] || k != GridEndIndex[2])
-        //   continue;
+        //   continue;            
 
         // if (i % 2 != 0 || j % 2 != 0 || k % 2 != 0)
         //   continue;

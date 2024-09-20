@@ -113,8 +113,8 @@ int grid::TransferSubgridMonteCarloTracerParticles(grid* Subgrids[], int NumberO
 
           while (mctp != NULL) {
 
-            for (dim = 0; dim < MAX_DIMENSION; dim++)
-              mctp->Position[dim] = pos[dim];
+            // for (dim = 0; dim < MAX_DIMENSION; dim++)
+            //   mctp->Position[dim] = pos[dim]; /** DEBUG COMMENTED OUT **/
 
             /* Find and store subgrid number of this mctp, and add to
            count. */

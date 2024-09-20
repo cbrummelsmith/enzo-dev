@@ -226,5 +226,32 @@ int grid::AdvectMonteCarloTracerParticles(int CycleNumber)
       } // END j
 	  } // ENDIF y-direction	
   } // END n 
+
+
+  // Set particle positions
+  
+  FLOAT pos[3];
+  MonteCarloTracerParticle* mctp;
+  int index = 0;
+  int dim;
+
+  for (k = 0; k < GridDimension[2]; k++)
+    for (j = 0; j < GridDimension[1]; j++)
+      for (i = 0; i < GridDimension[0]; i++, index++) {
+
+        /* Compute position */
+
+        pos[0] = CellLeftEdge[0][i] + 0.5*CellWidth[0][i];
+        pos[1] = CellLeftEdge[1][j] + 0.5*CellWidth[1][j];
+        pos[2] = CellLeftEdge[2][k] + 0.5*CellWidth[2][k];
+
+        mctp = MonteCarloTracerParticles[index];
+        while (mctp != NULL) {
+          for (dim = 0; dim < MAX_DIMENSION; dim++)
+            mctp->Position[dim] = pos[dim];
+          mctp = mctp->NextParticle;
+        }
+      }
+
   return SUCCESS;
 }

@@ -158,7 +158,7 @@ class grid
   //
   MonteCarloTracerParticle **MonteCarloTracerParticles;  
   float *MassFlux[MAX_DIMENSION];
-  int NumberOfMonteCarloTracerParticles; // Updated by calling CountNumberOfMonteCarloTracerParticles.
+  int NumberOfMonteCarloTracerParticles; // Updated by calling CountNumberOfMonteCarloTracerParticles or manually when communicating particles.
 
 
 //

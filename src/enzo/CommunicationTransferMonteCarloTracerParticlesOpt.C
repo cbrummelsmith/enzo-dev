@@ -169,12 +169,13 @@ int CommunicationTransferMonteCarloTracerParticles(grid *GridPointer[], int Numb
 
   // Copy shared Monte Carlo tracer particles to grids, if any
   if (NumberOfReceives > 0) {
+    printf("\nComTrans: NumberOfReceives %d", NumberOfReceives);
     for (j = 0; j < NumberOfGrids && jend < NumberOfReceives; j++) {
       while (SharedList[jend].grid <= j) {
     	 jend++;
     	 if (jend == NumberOfReceives) break;
       }
-
+      
       GridPointer[j]->CommunicationTransferMonteCarloTracerParticles
 	      (GridPointer, NumberOfGrids, j, TopGridDims, NumberToMove, 
 	      jstart, jend, SharedList, Layout, StartIndex, GridMap, COPY_IN);
@@ -195,7 +196,7 @@ int CommunicationTransferMonteCarloTracerParticles(grid *GridPointer[], int Numb
 
   CommunicationSumValues(&TotalNumberToMove, 1);
   if (debug)
-    printf("CommunicationTransferMonteCarloTracerParticles: moved = %"ISYM"\n",
+    printf("\nCommunicationTransferMonteCarloTracerParticles: moved = %"ISYM"\n",
   	   TotalNumberToMove);
 
   return SUCCESS;

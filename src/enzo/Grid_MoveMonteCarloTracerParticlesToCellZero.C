@@ -46,9 +46,12 @@ int grid::MoveMonteCarloTracerParticlesToCellZero()
     //this->WriteMCTP("MoveMCTP_A0");
     /* Loop over all cells and move particles in each cell to cell 0 */
     int count = 0;
-    for (k0 = GridStartIndex[2]; k0 <= GridEndIndex[2]; k0++) {
-      for (j0 = GridStartIndex[1]; j0 <= GridEndIndex[1]; j0++) {
-        for (i0 = GridStartIndex[0]; i0 <= GridEndIndex[0]; i0++) {
+    // for (k0 = GridStartIndex[2]; k0 <= GridEndIndex[2]; k0++) {
+    //   for (j0 = GridStartIndex[1]; j0 <= GridEndIndex[1]; j0++) {
+    //     for (i0 = GridStartIndex[0]; i0 <= GridEndIndex[0]; i0++) {
+    for (k0 = GridStartIndex[2] - 1; k0 <= GridEndIndex[2] + 1; k0++) {
+      for (j0 = GridStartIndex[1] - 1; j0 <= GridEndIndex[1] + 1; j0++) {
+        for (i0 = GridStartIndex[0] - 1; i0 <= GridEndIndex[0] + 1; i0++) {    
           count++;
  
           index = (k0*GridDimension[1] + j0)*GridDimension[0] + i0;

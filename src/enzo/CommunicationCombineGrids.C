@@ -86,7 +86,7 @@ int CommunicationCombineGrids(HierarchyEntry *OldHierarchy,
   grid *NewGrid = NewHierarchy->GridData;
 
   // if (MyProcessorNumber == ROOT_PROCESSOR) 
-  //   NewGrid->WriteMCTP("ComCombine_NewGrid_A0"); //DEBUG
+  //   // NewGrid->WriteMCTP("ComCombine_NewGrid_A0"); //DEBUG
 
   int count = -1;//DEBUG
 
@@ -111,14 +111,14 @@ int CommunicationCombineGrids(HierarchyEntry *OldHierarchy,
       strcat(filename, count_ch);
       strcat(filename, write_ch);
       //strcat(filename, rand_ch);
-      //NewGrid->WriteMCTP(filename); //DEBUG    
+      // // NewGrid->WriteMCTP(filename); //DEBUG    
     //}
 
  
     grid *OldGrid = Temp->GridData;
 
     // if (MyProcessorNumber == ROOT_PROCESSOR) 
-    //   NewGrid->WriteMCTP("ComCombine_NewGrid_A2"); //DEBUG
+    //  NewGrid->WriteMCTP("ComCombine_NewGrid_A2"); //DEBUG
 
     OldGrid->ReturnGridInfo(&Rank, TempDims, Left, Right);
     for (dim = 0; dim < MAX_DIMENSION; dim++) {
@@ -129,7 +129,7 @@ int CommunicationCombineGrids(HierarchyEntry *OldHierarchy,
     }
  
     // if (MyProcessorNumber == ROOT_PROCESSOR) 
-    //   NewGrid->WriteMCTP("ComCombine_NewGrid_A3"); //DEBUG
+    //  NewGrid->WriteMCTP("ComCombine_NewGrid_A3"); //DEBUG
     
     //Sometimes E isn't created by the time this code is run.Ensure it is.
 
@@ -157,7 +157,7 @@ int CommunicationCombineGrids(HierarchyEntry *OldHierarchy,
       }
     
     // if (MyProcessorNumber == ROOT_PROCESSOR) 
-    //   NewGrid->WriteMCTP("ComCombine_NewGrid_A4"); //DEBUG
+    //  NewGrid->WriteMCTP("ComCombine_NewGrid_A4"); //DEBUG
   
 
     /* Copy interpolated (particle) regions */
@@ -178,7 +178,7 @@ int CommunicationCombineGrids(HierarchyEntry *OldHierarchy,
     }
 
     // if (MyProcessorNumber == ROOT_PROCESSOR) 
-    //   NewGrid->WriteMCTP("ComCombine_NewGrid_A5"); //DEBUG    
+    //  NewGrid->WriteMCTP("ComCombine_NewGrid_A5"); //DEBUG    
  
     /* Copy particles. */
  
@@ -191,16 +191,16 @@ int CommunicationCombineGrids(HierarchyEntry *OldHierarchy,
       ENZO_FAIL("Error in grid->CommunicationSendActiveParticles.\n");
     }
 
-    // OldGrid->WriteMCTP("ComCombine_PreMoveCellZero"); //DEBUG
+    OldGrid->WriteMCTP("ComCombine_OldGrid_PreMoveCellZero"); //DEBUG
 
     if (OldGrid->MoveMonteCarloTracerParticlesToCellZero() == FAIL) {
       ENZO_FAIL("Error in grid->MoveMonteCarloTracerParticlesToCellZero.\n");
-    } 
+    }  
 
 
-    // OldGrid->WriteMCTP("ComCombine_OldGrid_PreSend"); //DEBUG
-    // if (MyProcessorNumber == ROOT_PROCESSOR) 
-    //   NewGrid->WriteMCTP("ComCombine_NewGrid_PreSend"); //DEBUG
+    OldGrid->WriteMCTP("ComCombine_OldGrid_PreSend"); //DEBUG
+    if (MyProcessorNumber == ROOT_PROCESSOR) 
+      NewGrid->WriteMCTP("ComCombine_NewGrid_PreSend"); //DEBUG
 
     /* Send Monte Carlo Tracer Particles to new grid but keep particles in OldGrid */
     printf("\nCOM_COMBINE: proc%d, OldGridProc%d, NewGridProc%d, NewProc %d, OldGrid %p, NewGrid %p",
@@ -211,9 +211,9 @@ int CommunicationCombineGrids(HierarchyEntry *OldHierarchy,
       ENZO_FAIL("Error in grid->CommunicationSendMonteCarloTracerParticles.\n");
     }
 
-    // OldGrid->WriteMCTP("ComCombine_OldGrid_PostSend"); //DEBUG
-    // if (MyProcessorNumber == ROOT_PROCESSOR) 
-    //   NewGrid->WriteMCTP("ComCombine_NewGrid_PostSend"); //DEBUG
+    OldGrid->WriteMCTP("ComCombine_OldGrid_PostSend"); //DEBUG
+    if (MyProcessorNumber == ROOT_PROCESSOR) 
+      NewGrid->WriteMCTP("ComCombine_NewGrid_PostSend"); //DEBUG
 
     if (OldGrid->DistributeMonteCarloTracerParticles() == FAIL) {
       ENZO_FAIL("Error in grid->DistributeMonteCarloTracerParticles.\n");
@@ -224,8 +224,9 @@ int CommunicationCombineGrids(HierarchyEntry *OldHierarchy,
     // }     
  
     // OldGrid->WriteMCTP("ComCombine_OldGrid_PostDistribute"); //DEBUG
-    // if (MyProcessorNumber == ROOT_PROCESSOR) 
-    //   NewGrid->WriteMCTP("ComCombine_NewGrid_PostDistribute"); //DEBUG
+    if (MyProcessorNumber == ROOT_PROCESSOR) 
+     NewGrid->WriteMCTP("ComCombine_NewGrid_PostDistribute"); //DEBUG
+
     /* Next Grid */
  
     Temp = Temp->NextGridThisLevel;

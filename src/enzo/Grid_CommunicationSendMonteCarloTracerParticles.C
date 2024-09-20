@@ -60,7 +60,7 @@ int grid::CommunicationSendMonteCarloTracerParticles(grid *ToGrid, int ToProcess
 
   TransferSize = NumberOfParticlesToTransfer;
   if (COM_COMBINE){
-    printf("\nCOMSEND_TRANSFER: proc%d, ToProc%d: CommSendMCTP: TransferSize (NumberOfMonteCarloTracerParticles) %d", MyProcessorNumber, ToProcessor, TransferSize);
+    printf("\nCommSendMCTP  : proc%d, ToProc%d: TransferSize (NumberOfMonteCarloTracerParticles) %d", MyProcessorNumber, ToProcessor, TransferSize);
     fflush(stdout);   
   }
 
@@ -212,8 +212,9 @@ int grid::CommunicationSendMonteCarloTracerParticles(grid *ToGrid, int ToProcess
       // if (COM_COMBINE) // DEBUG
       //   printf("\nCOMSEND_INDEX, proc%d, thisProc%d, ToProc%d: (%d, %d, %d), pos (%.4f, %.4f, %.4f)", MyProcessorNumber, ProcessorNumber, ToGrid->ProcessorNumber, i, j, k, mctp->Position[0], mctp->Position[1], mctp->Position[2]);
 
-      InsertMonteCarloTracerParticleAfter(ToGrid->MonteCarloTracerParticles[index], mctp);        
+      InsertMonteCarloTracerParticleAfter(ToGrid->MonteCarloTracerParticles[index], mctp);
     }
+    ToGrid->NumberOfMonteCarloTracerParticles += TransferSize; /* Added This */
 
     //ToGrid->WriteMCTP("ComSend_ToGrid_A1"); //DEBUG      
 

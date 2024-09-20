@@ -179,6 +179,7 @@ int CommunicationCollectParticles(LevelHierarchyEntry *LevelArray[],
       NumberToMove[i] = 0;
       StarsToMove[i] = 0;
       APNumberToMove[i] = 0;
+      MCTPNumberToMove[i] = 0;
     }
 
     for (j = 0; j < NumberOfSubgrids; j++)
@@ -563,10 +564,8 @@ int CommunicationCollectParticles(LevelHierarchyEntry *LevelArray[],
 	    ReturnNumberOfStars();
       TotalActiveParticlesToMove += GridHierarchyPointer[i]->GridData->
         ReturnNumberOfActiveParticles();
-      // TotalMonteCarloTracerParticlesToMove += GridHierarchyPointer[i]->GridData->
-      //   CountMonteCarloTracerParticlesInFirstGhostCells();  
       TotalMonteCarloTracerParticlesToMove += GridHierarchyPointer[i]->GridData->
-        GetNumberOfMonteCarloTracerParticles();            
+        GetNumberOfMonteCarloTracerParticles();         
         printf("\nCOMSIB PID%d, GPID%d, TotMCTP2Move %d", MyProcessorNumber, GridHierarchyPointer[i]->GridData->ReturnProcessorNumber(), TotalMonteCarloTracerParticlesToMove);  
 	}
 

@@ -12,6 +12,7 @@
 
 int grid::AllocateMonteCarloTracerParticleData()
 {
+  int zzz = 0;
 
   if (this->MonteCarloTracerParticles != NULL) {
     printf("proc%d: AllocateMonteCarloTracerParticleData: Already allocated. Returning now.", MyProcessorNumber);
@@ -33,6 +34,7 @@ int grid::AllocateMonteCarloTracerParticleData()
     this->MonteCarloTracerParticles[i] = NULL;
     for (dim = 0; dim < GridRank; dim++)
       this->MassFlux[dim][i] = 0.0;
-  }  
+  }
+  this->NumberOfMonteCarloTracerParticles = 0;  
   return SUCCESS;
 }
