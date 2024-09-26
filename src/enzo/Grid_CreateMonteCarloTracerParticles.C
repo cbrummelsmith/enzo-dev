@@ -46,9 +46,9 @@ int grid::CreateMonteCarloTracerParticles()
         // if (i != GridStartIndex[0] || j != GridEndIndex[1] || k != GridStartIndex[2])
         //   continue;        
 
-        /* DEBUG */
-        if (j != GridStartIndex[1])
-          continue;          
+        // /* DEBUG */
+        // if (j != GridStartIndex[1])
+        //   continue;          
 
         // if (i != GridEndIndex[0] || j != GridEndIndex[1] || k != GridEndIndex[2])
         //   continue;            

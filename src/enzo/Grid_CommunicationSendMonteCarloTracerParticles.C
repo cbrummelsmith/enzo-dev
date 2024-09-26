@@ -187,15 +187,6 @@ int grid::CommunicationSendMonteCarloTracerParticles(grid *ToGrid, int ToProcess
 
     //ToGrid->WriteMCTP("ComSend_ToGrid_A0"); //DEBUG    
 
-    // printf("COMSEND_INFO: proc%d, thisGridProc%d, ToGridProc%d, this %p, ToGrid %p, thisDims %d %d %d, ToGridDism %d %d %d, thisLE %.2f %.2f %.2f, ToGridLE %.2f %.2f %.2f, thisRE %.2f %.2f %.2f, ToGridRE %.2f %.2f %.2f \n",
-    // MyProcessorNumber, ProcessorNumber, ToProcessor, this, ToGrid, 
-    // this->GridDimension[0], this->GridDimension[1], this->GridDimension[2],
-    // ToGrid->GridDimension[0], ToGrid->GridDimension[1], ToGrid->GridDimension[2],
-    // this->GridLeftEdge[0], this->GridLeftEdge[1], this->GridLeftEdge[2],
-    // ToGrid->GridLeftEdge[0], ToGrid->GridLeftEdge[1], ToGrid->GridLeftEdge[2],
-    // this->GridRightEdge[0], this->GridRightEdge[1], this->GridRightEdge[2],
-    // ToGrid->GridRightEdge[0], ToGrid->GridRightEdge[1], ToGrid->GridRightEdge[2]); // DEBUG
-
     for (n = 0; n < TransferSize; n++) {
       mctp = MonteCarloTracerParticleBufferToList(buffer[n]);
       mctp->CurrentGrid = ToGrid;
@@ -214,7 +205,7 @@ int grid::CommunicationSendMonteCarloTracerParticles(grid *ToGrid, int ToProcess
 
       InsertMonteCarloTracerParticleAfter(ToGrid->MonteCarloTracerParticles[index], mctp);
     }
-    ToGrid->NumberOfMonteCarloTracerParticles += TransferSize; /* Added This */
+    ToGrid->NumberOfMonteCarloTracerParticles += TransferSize; 
 
     //ToGrid->WriteMCTP("ComSend_ToGrid_A1"); //DEBUG      
 

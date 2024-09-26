@@ -191,16 +191,16 @@ int CommunicationCombineGrids(HierarchyEntry *OldHierarchy,
       ENZO_FAIL("Error in grid->CommunicationSendActiveParticles.\n");
     }
 
-    OldGrid->WriteMCTP("ComCombine_OldGrid_PreMoveCellZero"); //DEBUG
+    // OldGrid->WriteMCTP("ComCombine_OldGrid_PreMoveCellZero"); //DEBUG
 
     if (OldGrid->MoveMonteCarloTracerParticlesToCellZero() == FAIL) {
       ENZO_FAIL("Error in grid->MoveMonteCarloTracerParticlesToCellZero.\n");
     }  
 
 
-    OldGrid->WriteMCTP("ComCombine_OldGrid_PreSend"); //DEBUG
-    if (MyProcessorNumber == ROOT_PROCESSOR) 
-      NewGrid->WriteMCTP("ComCombine_NewGrid_PreSend"); //DEBUG
+    // OldGrid->WriteMCTP("ComCombine_OldGrid_PreSend"); //DEBUG
+    // if (MyProcessorNumber == ROOT_PROCESSOR) 
+    //   NewGrid->WriteMCTP("ComCombine_NewGrid_PreSend"); //DEBUG
 
     /* Send Monte Carlo Tracer Particles to new grid but keep particles in OldGrid */
     printf("\nCOM_COMBINE: proc%d, OldGridProc%d, NewGridProc%d, NewProc %d, OldGrid %p, NewGrid %p",
@@ -211,9 +211,9 @@ int CommunicationCombineGrids(HierarchyEntry *OldHierarchy,
       ENZO_FAIL("Error in grid->CommunicationSendMonteCarloTracerParticles.\n");
     }
 
-    OldGrid->WriteMCTP("ComCombine_OldGrid_PostSend"); //DEBUG
-    if (MyProcessorNumber == ROOT_PROCESSOR) 
-      NewGrid->WriteMCTP("ComCombine_NewGrid_PostSend"); //DEBUG
+    // OldGrid->WriteMCTP("ComCombine_OldGrid_PostSend"); //DEBUG
+    // if (MyProcessorNumber == ROOT_PROCESSOR) 
+    //   NewGrid->WriteMCTP("ComCombine_NewGrid_PostSend"); //DEBUG
 
     if (OldGrid->DistributeMonteCarloTracerParticles() == FAIL) {
       ENZO_FAIL("Error in grid->DistributeMonteCarloTracerParticles.\n");
@@ -223,9 +223,9 @@ int CommunicationCombineGrids(HierarchyEntry *OldHierarchy,
     //   ENZO_FAIL("Error in grid->DistributeMonteCarloTracerParticles.\n");
     // }     
  
-    // OldGrid->WriteMCTP("ComCombine_OldGrid_PostDistribute"); //DEBUG
-    if (MyProcessorNumber == ROOT_PROCESSOR) 
-     NewGrid->WriteMCTP("ComCombine_NewGrid_PostDistribute"); //DEBUG
+    // // OldGrid->WriteMCTP("ComCombine_OldGrid_PostDistribute"); //DEBUG
+    // if (MyProcessorNumber == ROOT_PROCESSOR) 
+    //  NewGrid->WriteMCTP("ComCombine_NewGrid_PostDistribute"); //DEBUG
 
     /* Next Grid */
  

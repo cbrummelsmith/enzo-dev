@@ -71,7 +71,7 @@ int grid::CommunicationTransferMonteCarloTracerParticles(grid* Grids[], int Numb
 
 
     printf("\nGCTO pid%d gpid%d gid%d, NMCTP %d", MyProcessorNumber, ProcessorNumber, ID, NumberOfMonteCarloTracerParticles);
-    this->WriteMCTP("gComTrans_");
+    // this->WriteMCTP("gComTrans_");
     /* If there are no Monte Carlo tracer particles to move, we're done. */
 
     if (NumberOfMonteCarloTracerParticles == 0)
