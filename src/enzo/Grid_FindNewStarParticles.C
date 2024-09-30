@@ -38,7 +38,7 @@ int grid::FindNewStarParticles(int level)
   bool exists;
 
   for (i = 0; i < NumberOfParticles; i++) {
-  	printf("\nFindNewStarParticles: ParticleType[%d] = %d, -PARTICLE_TYPE_SINGLE_STAR = %d\n", i, ParticleType[i], -PARTICLE_TYPE_SINGLE_STAR);
+  	//NewStarParticles: ParticleType[%d] = %d, -PARTICLE_TYPE_SINGLE_STAR = %d\n", i, ParticleType[i], -PARTICLE_TYPE_SINGLE_STAR);
     if (ParticleType[i] == -PARTICLE_TYPE_SINGLE_STAR ||
 	ParticleType[i] == -PARTICLE_TYPE_BLACK_HOLE ||
 	ParticleType[i] == -PARTICLE_TYPE_CLUSTER ||

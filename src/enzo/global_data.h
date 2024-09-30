@@ -745,7 +745,7 @@ EXTERN int MonteCarloTracerParticlesOn;
 EXTERN int TotalNumberOfMonteCarloTracerParticles;
 EXTERN int NumberOfMonteCarloTracerParticlesPerCell;
 EXTERN int NumberOfMonteCarloTracerParticleAttributes;
-EXTERN int NumberOfMonteCarloTracerParticlesPerSupernova;
+EXTERN int NumberOfMonteCarloTracerParticlesPerSupernovaCell;
 
 
 EXTERN int   ParticleTypeInFile;

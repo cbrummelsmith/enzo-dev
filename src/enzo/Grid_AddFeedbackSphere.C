@@ -43,6 +43,8 @@
 #define MAX_TEMPERATURE 1e8
 
 int FindField(int field, int farray[], int numfields);
+void InsertMonteCarloTracerParticleAfter(MonteCarloTracerParticle * &Node, MonteCarloTracerParticle * &NewNode);
+
 
 int grid::AddFeedbackSphere(TopGridData *MetaData, Star *cstar, int level, float radius, float DensityUnits, 
 			    float LengthUnits, float VelocityUnits, 
@@ -61,6 +63,13 @@ int grid::AddFeedbackSphere(TopGridData *MetaData, Star *cstar, int level, float
   float r1, norm, ramp, factor, newGE, fh;
   double increase;
 
+  FLOAT mctp_pos[3];
+  float CellVolume, mctp_mass;
+  int i_mctp;
+  MonteCarloTracerParticle* new_mctp;
+  int NumberOfNewMonteCarloTracerParticles = 0;
+  PINT groupID = cstar->Identifier;
+
   if (MyProcessorNumber != ProcessorNumber)
     return SUCCESS;
 
@@ -78,6 +87,12 @@ int grid::AddFeedbackSphere(TopGridData *MetaData, Star *cstar, int level, float
 
   for (dim = 0; dim < GridRank; dim++)
     DomainWidth[dim] = DomainRightEdge[dim] - DomainLeftEdge[dim];
+
+	/* Compute cell volume */
+
+	CellVolume = 1.0;
+	for (dim = 0; dim < GridRank; dim++)
+		CellVolume *= CellWidth[dim][0];	
 
   /* Find fields: density, total energy, velocity1-3. */
 
@@ -135,7 +150,7 @@ int grid::AddFeedbackSphere(TopGridData *MetaData, Star *cstar, int level, float
 
   if (cstar->FeedbackFlag == SUPERNOVA || 
       cstar->FeedbackFlag == CONT_SUPERNOVA) {
-
+  printf("\nStartSupernova"); // ** DEBUG **
   // Correct for exaggerated influence radius for pair-instability supernovae
     if (cstar->FeedbackFlag == SUPERNOVA)
       radius /= 1.0;
@@ -285,13 +300,31 @@ int grid::AddFeedbackSphere(TopGridData *MetaData, Star *cstar, int level, float
 	    if (MetallicityField == TRUE)
 	      BaryonField[MetalNum][index] += EjectaMetalDensity;
 
+		
+		/* Inject MonteCarloTracerParticles */
+		
+	    if (MonteCarloTracerParticlesOn && MetallicityField == TRUE && radius2 <= MetalRadius2){
+		  mctp_mass = EjectaMetalDensity * CellVolume;
+
+		  mctp_pos[2] = CellLeftEdge[2][k] + 0.5 * CellWidth[2][0];
+          mctp_pos[1] = CellLeftEdge[1][j] + 0.5 * CellWidth[1][0];
+          mctp_pos[0] = CellLeftEdge[0][i] + 0.5 * CellWidth[0][0]; 
+		  
+		  for (i_mctp = 0; i_mctp < NumberOfMonteCarloTracerParticlesPerSupernovaCell; i++){
+            new_mctp = new MonteCarloTracerParticle(this, index, groupID, GridLevel, Time, mctp_pos, mctp_mass, 0);
+		  	InsertMonteCarloTracerParticleAfter(MonteCarloTracerParticles[index], new_mctp);
+		  	TotalNumberOfMonteCarloTracerParticles++;	
+			NumberOfMonteCarloTracerParticles++;
+		  }
+		}
+	
 	    CellsModified++;
 
 	  } // END if inside radius
 	}  // END i-direction
       }  // END j-direction
     }  // END k-direction
-
+	printf("\nEndSupernova");  // ** DEBUG **
   }  // END Supernova
 
   /***********************************************************************

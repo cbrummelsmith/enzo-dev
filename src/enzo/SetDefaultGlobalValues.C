@@ -359,7 +359,7 @@ int SetDefaultGlobalValues(TopGridData &MetaData)
   TotalNumberOfMonteCarloTracerParticles = 0;
   NumberOfMonteCarloTracerParticlesPerCell = 1;
   NumberOfMonteCarloTracerParticleAttributes = 1;
-  NumberOfMonteCarloTracerParticlesPerSupernova = 100;
+  NumberOfMonteCarloTracerParticlesPerSupernovaCell = 10;
 
   OutputOnDensity                  = 0;
   StartDensityOutputs              = 999;

@@ -186,6 +186,8 @@ int grid::MoveAllParticles(int NumberOfGrids, grid* FromGrid[])
 
   /******************** MONTE CARLO TRACER PARTICLE ********************/  
 
+  if (MonteCarloTracerParticlesOn) {
+
   MonteCarloTracerParticle *MoveMCTP, *mctp;
 
   for (grid = 0; grid < NumberOfGrids; grid++) {
@@ -197,6 +199,11 @@ int grid::MoveAllParticles(int NumberOfGrids, grid* FromGrid[])
     //   MoveParticles.copy_and_insert(*(FromGrid[grid]->ActiveParticles[i]));
     // }
     // FromGrid[grid]->DeleteActiveParticles();
+    
+    /* Are there any particles in this grid to move? */
+
+    if (FromGrid[grid]->MonteCarloTracerParticles == NULL)
+      continue; 
 
     FromGrid[grid]->MoveMonteCarloTracerParticlesToCellZero(); // This also sets the particle position
     mctp = FromGrid[grid]->MonteCarloTracerParticles[0]; 
@@ -220,6 +227,8 @@ int grid::MoveAllParticles(int NumberOfGrids, grid* FromGrid[])
   NumberOfMonteCarloTracerParticles = TotalNumberOfMonteCarloTracerParticles;
 
   this->DistributeMonteCarloTracerParticles();
+
+} /* End Monte Carlo Tracer Particles */
  
   return SUCCESS;
 }
