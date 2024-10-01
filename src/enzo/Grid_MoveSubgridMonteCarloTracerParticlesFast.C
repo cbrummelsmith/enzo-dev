@@ -204,8 +204,8 @@ int grid::MoveSubgridMonteCarloTracerParticlesFast(int NumberOfSubgrids, grid* T
     delete filename;
     //** END DEBUG **
     
-    delete [] BaryonField[NumberOfBaryonFields];
-    BaryonField[NumberOfBaryonFields] = NULL;
+    // delete [] BaryonField[NumberOfBaryonFields]; This is handled when this function exits in MoveSubgridParticlesFast
+    // BaryonField[NumberOfBaryonFields] = NULL;
  
   } // end: if (MyProcessorNumber)
  

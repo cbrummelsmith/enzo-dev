@@ -181,6 +181,12 @@ int grid::MoveSubgridParticlesFast(int NumberOfSubgrids, grid* ToGrids[],
       } // end: if (subgrid >= 0)
  
     } // end: loop over particles
+
+    /* Move Monte Carlo Tracer Particles*/
+
+    if (this->MoveSubgridMonteCarloTracerParticlesFast(NumberOfSubgrids, ToGrids, AllLocal) == FAIL) {
+      ENZO_FAIL("Error in grid->MoveSubgridMonteCarloTracerParticlesFast.");     
+    }     
  
     /* Clean up the moved particles. */
  
