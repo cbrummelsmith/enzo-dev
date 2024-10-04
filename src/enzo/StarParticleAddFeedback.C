@@ -64,11 +64,11 @@ int StarParticleAddFeedback(TopGridData *MetaData,
   LevelHierarchyEntry *Temp;
 
   if (AllStars == NULL) {
-      //printf("\nIn AddFeedback: No stars\n");
+      printf("\nIn AddFeedback: No stars\n");
     return SUCCESS;
   }
 
-  //printf("\nAddFeedbackSTART\n");
+  printf("\nAddFeedbackSTART\n");
 
   LCAPERF_START("StarParticleAddFeedback");
 
@@ -110,6 +110,7 @@ int StarParticleAddFeedback(TopGridData *MetaData,
 	!cstar->ApplyFeedbackTrue(SNe_dt))
       continue;
 
+    printf("\nPreCalculateFeedbackParams");
     dtForThisStar = LevelArray[level]->GridData->ReturnTimeStep();
 	  
     /* Compute some parameters */

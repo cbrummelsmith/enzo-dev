@@ -309,12 +309,13 @@ int grid::AddFeedbackSphere(TopGridData *MetaData, Star *cstar, int level, float
 		  mctp_pos[2] = CellLeftEdge[2][k] + 0.5 * CellWidth[2][0];
           mctp_pos[1] = CellLeftEdge[1][j] + 0.5 * CellWidth[1][0];
           mctp_pos[0] = CellLeftEdge[0][i] + 0.5 * CellWidth[0][0]; 
-		  
-		  for (i_mctp = 0; i_mctp < NumberOfMonteCarloTracerParticlesPerSupernovaCell; i++){
+		  for (i_mctp = 0; i_mctp < NumberOfMonteCarloTracerParticlesPerSupernovaCell; i_mctp++){
             new_mctp = new MonteCarloTracerParticle(this, index, groupID, GridLevel, Time, mctp_pos, mctp_mass, 0);
 		  	InsertMonteCarloTracerParticleAfter(MonteCarloTracerParticles[index], new_mctp);
 		  	TotalNumberOfMonteCarloTracerParticles++;	
 			NumberOfMonteCarloTracerParticles++;
+			printf("\npid %d gid %d: SN_mctp, %d %d %d, NMCTP %d", MyProcessorNumber, ProcessorNumber, i, j, k, NumberOfMonteCarloTracerParticles);
+			fflush(stdout);
 		  }
 		}
 	

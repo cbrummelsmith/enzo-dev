@@ -49,9 +49,12 @@ int grid::MoveMonteCarloTracerParticlesToCellZero()
     // for (k0 = GridStartIndex[2]; k0 <= GridEndIndex[2]; k0++) {
     //   for (j0 = GridStartIndex[1]; j0 <= GridEndIndex[1]; j0++) {
     //     for (i0 = GridStartIndex[0]; i0 <= GridEndIndex[0]; i0++) {
-    for (k0 = GridStartIndex[2] - 1; k0 <= GridEndIndex[2] + 1; k0++) {
-      for (j0 = GridStartIndex[1] - 1; j0 <= GridEndIndex[1] + 1; j0++) {
-        for (i0 = GridStartIndex[0] - 1; i0 <= GridEndIndex[0] + 1; i0++) {    
+    // for (k0 = GridStartIndex[2] - 1; k0 <= GridEndIndex[2] + 1; k0++) {
+    //   for (j0 = GridStartIndex[1] - 1; j0 <= GridEndIndex[1] + 1; j0++) {
+    //     for (i0 = GridStartIndex[0] - 1; i0 <= GridEndIndex[0] + 1; i0++) { 
+    for (k0 = GridStartIndex[2] - NumberOfGhostZones; k0 <= GridEndIndex[2] + NumberOfGhostZones; k0++) {
+      for (j0 = GridStartIndex[1] - NumberOfGhostZones; j0 <= GridEndIndex[1] + NumberOfGhostZones; j0++) {
+        for (i0 = GridStartIndex[0] - NumberOfGhostZones; i0 <= GridEndIndex[0] + NumberOfGhostZones; i0++) {        
           count++;
  
           index = (k0*GridDimension[1] + j0)*GridDimension[0] + i0;
